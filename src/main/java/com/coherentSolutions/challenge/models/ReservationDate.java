@@ -1,12 +1,14 @@
 package com.coherentSolutions.challenge.models;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,7 +23,8 @@ public class ReservationDate {
     private LocalDate reservationDate;
 
     @ManyToOne
-    @JoinColumn(name = "FK_RESERVATION")
+    @JoinColumn(name = "FK_RESERVATION_ID")
+    //@PrimaryKeyJoinColumn
     private Reservation reservation;
 
     @Override
