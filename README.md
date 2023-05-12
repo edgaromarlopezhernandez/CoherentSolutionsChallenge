@@ -1,16 +1,16 @@
-# Coherent Solutions Challenge - Simple Backend for Hotel reservations
-Create a backend application for hotel to work with reservations.
+# COHERENT SOLUTIONS CHALLENGE
+Simple Backend application for hotel to work with reservations.
 
 The objective of this project is to create a simple backend for hotel reservations, aligning as closely as possible with the instructions. However, I also want to mention that I made a couple of decisions that don't fully comply with the given requirements but have a valid reason behind them.
 
-## Business requirements
+## BUSINESS REQUIREMENTS
 The three points of the business requirements are perfectly met, which are:
 
 - Create a new reservation.
 - Read all reservations.
 - Modify certain values of an existing reservation by ID.
 
-## Technical requirements
+## TECHNICAL REQUIREMENTS
 **The Java version used: 8**
 
 **Build automation tool: Maven** (However, I also want to mention that I am proficient in Gradle).
@@ -32,7 +32,7 @@ I want to emphasize that I decided to choose an in-memory database to avoid deal
 However, if it were crucial to implement a different approach to excel in this challenge, I am willing to do it in a couple of days if allowed.
 To conclude, my son broke his leg on Tuesday, so I could only invest a limited amount of time in this challenge. It was not because I didn't want to but rather due to taking care of my son in this unfortunate situation. Furthermore, I would have liked to develop the frontend in React JS, but I didn't have enough free time after work and taking care of my son for all of that.
 
-## Work that was done
+## WORK THAT WAS DONE
 
 - This README.md file.
 - Property files for DEV, QA, and PROD environments.
@@ -44,13 +44,13 @@ To conclude, my son broke his leg on Tuesday, so I could only invest a limited a
 - Added pagination for the API GET's methods.
 - Swagger documentation for the application, which can be accessed at: [http://localhost:8087/api/v1/swagger-ui/index.html](http://localhost:8087/api/v1/swagger-ui/index.html)
 
-## Work that needs to be done
+## WORK THAT NEEDS TO BE DONE
 
 - Implement security with Spring Security using JWT and roles.
 - Unit testing.
 - Frontend with React JS.
 
-## Run this project
+## RUN IT!!
 
 ### Spring boot run: `mvn clean install spring-boot:run`
 Runs the app in development mode.<br />
@@ -65,7 +65,7 @@ spring.datasource.username=rootUser
 spring.datasource.password=
 ```
 
-## Farewell
+## FAREWELL
 Thank you very much for the opportunity to participate, and I hope this small project briefly showcases my work and practices. I am very enthusiastic about this job, and although I couldn't dedicate much time due to my current responsibilities at work and as a father with my wife and children, I want to make it clear that I put forth my best effort and dedication into this small project.
 
 Regards
