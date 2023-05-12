@@ -40,7 +40,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(DataNotFoundException.class)
     public ResponseEntity<Object> handleNotFoundExceptions(DataNotFoundException exception, WebRequest request){
-        log.info(request.getDescription(true), request.getContextPath());// check other features of webRequest
+        log.info(request.getDescription(true), request.getContextPath());
         return new CustomResponse(false, exception.getMessage(), null).createResponse(HttpStatus.NOT_FOUND);
     }
 
