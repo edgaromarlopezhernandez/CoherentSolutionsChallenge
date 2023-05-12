@@ -40,7 +40,7 @@ To conclude, my son broke his leg on Tuesday, so I could only invest a limited a
 - An enumeration for messages used throughout the application.
 - Request validators that help identify erroneous data before proceeding to transactional operations with the database.
 - Formatters, which may seem unnecessary in this exercise, but when the application grows, they help maintain a consistent format for persisted information.
-- Implemented a custom response (CustomResponse.class) for every response, indicating whether the request was successful or not, along with a message and the corresponding value.
+- Implemented a custom response (CustomResponse.class) for every response, indicating whether the request was successful or not, along with a message and the corresponding content.
 - Added pagination for the API GET's methods.
 - Swagger documentation for the application, which can be accessed at: [http://localhost:8087/api/v1/swagger-ui/index.html](http://localhost:8087/api/v1/swagger-ui/index.html)
 
