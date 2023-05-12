@@ -54,7 +54,7 @@ To conclude, my son broke his leg on Tuesday, so I could only invest a limited a
 
 ### Spring boot run: `mvn clean install spring-boot:run`
 Runs the app in development mode.<br />
-API: [http://localhost:8087/api/v1/swagger-ui/index.html](http://localhost:8087/api/v1/swagger-ui/index.html) to access the api endpoints.
+API: http://localhost:8087/api/v1/ to access the api endpoints.
 
 H2 Console: [http://localhost:8087/api/v1/h2-console](http://localhost:8087/api/v1/h2-console)
 
