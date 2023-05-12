@@ -27,7 +27,7 @@ public class ReservationConverter extends AbstractConverter<Reservation, Reserva
     @Override
     public ReservationResponse fromEntity(Reservation entity) {
         if(entity == null)
-            throw new RuntimeException("Null entity in reservation converter not allowed");
+            throw new DataNotFoundException("Null entity in reservation converter not allowed");
 
         List<String> lines = getReservationDatesByReservationId(entity.getId());
 
@@ -43,7 +43,7 @@ public class ReservationConverter extends AbstractConverter<Reservation, Reserva
         List<ReservationDate> list = reservationDateDAO.findAllDatesByReservationId(id);
         List<String> reservationList = new ArrayList<>();
 
-        if(list.size() != 0){
+        if(!list.isEmpty()){
             for(ReservationDate value: list)
                 reservationList.add(value.getReservationDate().toString());
         }
@@ -51,25 +51,16 @@ public class ReservationConverter extends AbstractConverter<Reservation, Reserva
         return reservationList;
     }
 
-    private List<String> fromReservationDateEntity(List<ReservationDate> lines) {
-        if(lines == null) return null;
-        List<String> dates = new ArrayList<>();
-        for(ReservationDate reservationDate: lines){
-            dates.add(reservationDate.getReservationDate().toString());
-        }
-        return dates;
-    }
-
     @Override
     public Reservation fromDTO(ReservationResponse dto) {
         if (dto == null)
-            throw new RuntimeException("Null dto in reservation converter not allowed");
+            throw new DataNotFoundException("Null dto in reservation converter not allowed");
 
         List<ReservationDate> lines = setListOfReservationDates(dto.getReservationDates(), dto.getId());
 
         return Reservation.builder()
                 .clientFullName(dto.getClientFullName())
-                .roomNumber(Integer.valueOf(dto.getRoomNumber()))
+                .roomNumber(dto.getRoomNumber())
                 .reservationDates(lines)
                 .build();
     }

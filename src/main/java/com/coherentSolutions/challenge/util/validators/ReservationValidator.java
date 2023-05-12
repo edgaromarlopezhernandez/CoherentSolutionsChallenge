@@ -13,9 +13,10 @@ import java.util.Locale;
 @Component
 public class ReservationValidator {
 
-    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd").withLocale(Locale.US);
     public void validateReservationToCreateANewRecord (ReservationRequest reservationRequest){
-        formatter = formatter.withLocale( Locale.US );  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
+        if(reservationRequest.getId() != null)
+            throw new IncorrectDataBadRequestException(AppMessages.RESERVATION_ID_NOT_ALLOWED_TO_CREATE_A_NEW_RECORD.getMessage());
         if(reservationRequest.getClientFullName() == null)
             throw new IncorrectDataBadRequestException(AppMessages.RESERVATION_NULL_CLIENT_FULL_NAME.getMessage());
         if(reservationRequest.getClientFullName().isEmpty())
@@ -40,7 +41,6 @@ public class ReservationValidator {
     }
 
     public void validateReservationToUpdateARecord (ReservationRequest reservationRequest){
-        formatter = formatter.withLocale( Locale.US );  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
         if(reservationRequest.getId() == null)
             throw new IncorrectDataBadRequestException(AppMessages.RESERVATION_NULL_ID.getMessage());
         if(reservationRequest.getId().isEmpty())
@@ -62,8 +62,6 @@ public class ReservationValidator {
         if(reservationRequest.getReservationDates() != null) {
             for(int i = 0; i < reservationRequest.getReservationDates().size(); i++){
                 try{
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                    formatter = formatter.withLocale( Locale.US );
                     LocalDate.parse(reservationRequest.getReservationDates().get(i), formatter);
                 } catch(Exception e) {
                     throw new IncorrectDataBadRequestException(AppMessages.RESERVATION_INCORRECT_DATES.getMessage());

@@ -2,6 +2,10 @@ package com.coherentSolutions.challenge.util.enums;
 
 public enum AppMessages {
 
+    ERROR_EXCEPTION("************************ERROR EXCEPTION************************"),
+    ERROR_MESSAGE("\"ERROR MESSAGE=> \""),
+    INFO_MESSAGE("\"INFO MESSAGE=> \""),
+    RESERVATION_ID_NOT_ALLOWED_TO_CREATE_A_NEW_RECORD("The \"ID\" is not required to create a new record (reservation), it is only required in this DTO for updating a reservation."),
     RESERVATION_DOES_NOT_EXIST("Reservation doesn't exist"),
     RESERVATION_ID_IS_NOT_A_NUMERIC_VALUE("Empty \"ID\" not allowed"),
     RESERVATION_EMPTY_ID("Empty \"ID\" not allowed"),

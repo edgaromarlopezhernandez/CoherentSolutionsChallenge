@@ -6,6 +6,7 @@ import com.coherentSolutions.challenge.dtos.ReservationRequest;
 import com.coherentSolutions.challenge.dtos.ReservationResponse;
 import com.coherentSolutions.challenge.exceptions.DataNotFoundException;
 import com.coherentSolutions.challenge.exceptions.GeneralException;
+import com.coherentSolutions.challenge.exceptions.IncorrectDataBadRequestException;
 import com.coherentSolutions.challenge.models.Reservation;
 import com.coherentSolutions.challenge.models.ReservationDate;
 import com.coherentSolutions.challenge.repositories.ReservationDAO;
@@ -55,28 +56,36 @@ public class ReservationService implements ReservationServiceContract {
 
     @Override
     public Optional<PaginatedReservations> findAllReservations(Integer pageNumber, Integer pageSize) {
-        Long totalNumberOfRecords = reservationDAO.count();
-        if(totalNumberOfRecords == 0)
-            return Optional.empty();
-        return fetchAllReservationsData(pageNumber, pageSize, totalNumberOfRecords);
+        try{
+            Long totalNumberOfRecords = reservationDAO.count();
+            if(totalNumberOfRecords == 0)
+                return Optional.empty();
+            return fetchAllReservationsData(pageNumber, pageSize, totalNumberOfRecords);
+        }catch (DataNotFoundException | IncorrectDataBadRequestException exception){
+            log.info(AppMessages.INFO_MESSAGE.getMessage() + exception.getMessage(), exception);
+            throw exception;
+        }catch (Exception exception){
+            log.error(AppMessages.ERROR_MESSAGE.getMessage() + exception.getMessage(), exception);
+            throw new GeneralException(exception.getMessage(), exception);
+        }
     }
 
     public Optional<PaginatedReservations> fetchAllReservationsData(Integer pageNumber, Integer pageSize, Long totalNumberOfRecords) {
-        PageInfo pageInfo = pageableHelper.helper(pageNumber, pageSize, totalNumberOfRecords);
-        PaginatedReservations paginatedReservations = new PaginatedReservations();
-        paginatedReservations.setPageInfo(pageInfo);
-
-        Pageable page = PageRequest.of(pageInfo.getCurrentPage() -1, pageInfo.getPageSize());
-        List<Reservation> reservations = reservationDAO.findAll(page).toList();
-        System.out.println("Tamaño de lista de reservaciones");
-        System.out.println(reservations.size());
-        /*reservations.forEach(reservation -> reservation.setReservationDates(reservationDateDAO.findAllDatesByReservationId(reservation.getId(), page).toList()));*/
-
-
-
-
-        paginatedReservations.setReservations(converter.fromEntity(reservations));
-        return Optional.of(paginatedReservations);
+        try{
+            PageInfo pageInfo = pageableHelper.helper(pageNumber, pageSize, totalNumberOfRecords);
+            PaginatedReservations paginatedReservations = new PaginatedReservations();
+            paginatedReservations.setPageInfo(pageInfo);
+            Pageable page = PageRequest.of(pageInfo.getCurrentPage() -1, pageInfo.getPageSize());
+            List<Reservation> reservations = reservationDAO.findAll(page).toList();
+            paginatedReservations.setReservations(converter.fromEntity(reservations));
+            return Optional.of(paginatedReservations);
+        }catch (DataNotFoundException | IncorrectDataBadRequestException exception){
+            log.info(AppMessages.INFO_MESSAGE.getMessage() + exception.getMessage(), exception);
+            throw exception;
+        }catch (Exception exception){
+            log.error(AppMessages.ERROR_MESSAGE.getMessage() + exception.getMessage(), exception);
+            throw new GeneralException(exception.getMessage(), exception);
+        }
     }
 
     @Override
@@ -101,11 +110,11 @@ public class ReservationService implements ReservationServiceContract {
                 return converter.fromEntity(reservationDAO.save(formattedReservation));
             } else
                 return null;
-        }/*catch (DataNotFoundException | IncorrectDataBadRequestException exception){
-            log.info("INFO MESSAGE=> " + exception.getMessage(), exception);
+        }catch (DataNotFoundException | IncorrectDataBadRequestException exception){
+            log.info(AppMessages.INFO_MESSAGE.getMessage() + exception.getMessage(), exception);
             throw exception;
-        }*/catch (Exception exception){
-            log.error("ERROR MESSAGE=> " + exception.getMessage(), exception);
+        }catch (Exception exception){
+            log.error(AppMessages.ERROR_MESSAGE.getMessage() + exception.getMessage(), exception);
             throw new GeneralException(exception.getMessage(), exception);
         }
     }
@@ -142,11 +151,11 @@ public class ReservationService implements ReservationServiceContract {
             } else
                 return Optional.empty();
 
-        }/*catch (DataNotFoundException | IncorrectDataBadRequestException exception){
-            log.info("INFO MESSAGE=> " + exception.getMessage(), exception);
+        }catch (DataNotFoundException | IncorrectDataBadRequestException exception){
+            log.info(AppMessages.INFO_MESSAGE.getMessage() + exception.getMessage(), exception);
             throw exception;
-        }*/catch (Exception exception){
-            log.error("ERROR MESSAGE=> " + exception.getMessage(), exception);
+        }catch (Exception exception){
+            log.error(AppMessages.ERROR_MESSAGE.getMessage() + exception.getMessage(), exception);
             throw new GeneralException(exception.getMessage(), exception);
         }
     }
