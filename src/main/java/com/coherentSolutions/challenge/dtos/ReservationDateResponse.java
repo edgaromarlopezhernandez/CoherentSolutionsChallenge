@@ -5,12 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.io.Serializable;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
-public class ReservationDateResponse {
+public class ReservationDateResponse implements Serializable {
     private String reservationDate;
 }

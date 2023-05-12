@@ -2,14 +2,7 @@ package com.coherentSolutions.challenge.util.formatters;
 
 import com.coherentSolutions.challenge.dtos.ReservationRequest;
 import com.coherentSolutions.challenge.models.Reservation;
-import com.coherentSolutions.challenge.models.ReservationDate;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 @Component
 public class ReservationFormatter {

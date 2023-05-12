@@ -10,7 +10,7 @@ public abstract class AbstractConverter<E, D> {
 
     public List<D> fromEntity(List<E> entities){
         return entities.stream()
-                .map(e -> fromEntity(e))
+                .map(this::fromEntity)
                 .collect(Collectors.toList());
     }
 
