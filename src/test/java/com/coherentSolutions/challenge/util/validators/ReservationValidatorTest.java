@@ -2,7 +2,7 @@ package com.coherentSolutions.challenge.util.validators;
 
 import com.coherentSolutions.challenge.dtos.ReservationRequest;
 import com.coherentSolutions.challenge.exceptions.IncorrectDataBadRequestException;
-import com.coherentSolutions.challenge.util.ReservationRequestStubs;
+import com.coherentSolutions.challenge.util.ReservationStubs;
 import com.coherentSolutions.challenge.util.enums.AppMessages;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -24,7 +24,7 @@ public class ReservationValidatorTest {
     void shouldThrowReservationIdNotAllowedToCreateANewRecordExceptionIfIdIsNotNull() {
 
         IncorrectDataBadRequestException incorrectDataBadRequestException = Assertions.assertThrows(IncorrectDataBadRequestException.class, () -> {
-            validator.validateReservationToCreateANewRecord(ReservationRequestStubs.getReservationRequestStub());
+            validator.validateReservationToCreateANewRecord(ReservationStubs.getReservationRequestStub());
         });
         Assertions.assertEquals(AppMessages.RESERVATION_ID_NOT_ALLOWED_TO_CREATE_A_NEW_RECORD.getMessage(), incorrectDataBadRequestException.getMessage());
     }
@@ -34,7 +34,7 @@ public class ReservationValidatorTest {
     void shouldThrowReservationNullClientFullNameExceptionIfClientFullNameIsNull() {
 
         IncorrectDataBadRequestException incorrectDataBadRequestException = Assertions.assertThrows(IncorrectDataBadRequestException.class, () -> {
-            ReservationRequest reservationRequest = ReservationRequestStubs.getReservationRequestStub();
+            ReservationRequest reservationRequest = ReservationStubs.getReservationRequestStub();
             reservationRequest.setId(null);
             reservationRequest.setClientFullName(null);
             validator.validateReservationToCreateANewRecord(reservationRequest);
@@ -47,7 +47,7 @@ public class ReservationValidatorTest {
     void shouldThrowReservationEmptyClientFullNameExceptionIfClientFullNameIsEmpty() {
 
         IncorrectDataBadRequestException incorrectDataBadRequestException = Assertions.assertThrows(IncorrectDataBadRequestException.class, () -> {
-            ReservationRequest reservationRequest = ReservationRequestStubs.getReservationRequestStub();
+            ReservationRequest reservationRequest = ReservationStubs.getReservationRequestStub();
             reservationRequest.setId(null);
             reservationRequest.setClientFullName("");
             validator.validateReservationToCreateANewRecord(reservationRequest);
@@ -60,7 +60,7 @@ public class ReservationValidatorTest {
     void shouldThrowReservationClientFullNameLengthGraterThan50ExceptionIfClientFullNameIsGraterThan50Chars() {
 
         IncorrectDataBadRequestException incorrectDataBadRequestException = Assertions.assertThrows(IncorrectDataBadRequestException.class, () -> {
-            ReservationRequest reservationRequest = ReservationRequestStubs.getReservationRequestStub();
+            ReservationRequest reservationRequest = ReservationStubs.getReservationRequestStub();
             reservationRequest.setId(null);
             reservationRequest.setClientFullName("Name too long for test Name too long for test Name too long for test");
             validator.validateReservationToCreateANewRecord(reservationRequest);
@@ -73,7 +73,7 @@ public class ReservationValidatorTest {
     void shouldThrowReservationNullRoomNumberIfRoomNumberIsNull() {
 
         IncorrectDataBadRequestException incorrectDataBadRequestException = Assertions.assertThrows(IncorrectDataBadRequestException.class, () -> {
-            ReservationRequest reservationRequest = ReservationRequestStubs.getReservationRequestStub();
+            ReservationRequest reservationRequest = ReservationStubs.getReservationRequestStub();
             reservationRequest.setId(null);
             reservationRequest.setRoomNumber(null);
             validator.validateReservationToCreateANewRecord(reservationRequest);
@@ -86,7 +86,7 @@ public class ReservationValidatorTest {
     void shouldThrowReservationEmptyRoomNumberIfRoomNumberIsEmpty() {
 
         IncorrectDataBadRequestException incorrectDataBadRequestException = Assertions.assertThrows(IncorrectDataBadRequestException.class, () -> {
-            ReservationRequest reservationRequest = ReservationRequestStubs.getReservationRequestStub();
+            ReservationRequest reservationRequest = ReservationStubs.getReservationRequestStub();
             reservationRequest.setId(null);
             reservationRequest.setRoomNumber("");
             validator.validateReservationToCreateANewRecord(reservationRequest);
@@ -99,7 +99,7 @@ public class ReservationValidatorTest {
     void shouldThrowReservationRoomNumberIsNotNumericIfRoomNumberIsNotNumeric() {
 
         IncorrectDataBadRequestException incorrectDataBadRequestException = Assertions.assertThrows(IncorrectDataBadRequestException.class, () -> {
-            ReservationRequest reservationRequest = ReservationRequestStubs.getReservationRequestStub();
+            ReservationRequest reservationRequest = ReservationStubs.getReservationRequestStub();
             reservationRequest.setId(null);
             reservationRequest.setRoomNumber("Not numeric");
             validator.validateReservationToCreateANewRecord(reservationRequest);
@@ -112,7 +112,7 @@ public class ReservationValidatorTest {
     void shouldThrowReservationNullDatesIfReservationDatesIsNull() {
 
         IncorrectDataBadRequestException incorrectDataBadRequestException = Assertions.assertThrows(IncorrectDataBadRequestException.class, () -> {
-            ReservationRequest reservationRequest = ReservationRequestStubs.getReservationRequestStub();
+            ReservationRequest reservationRequest = ReservationStubs.getReservationRequestStub();
             reservationRequest.setId(null);
             reservationRequest.setReservationDates(null);
             validator.validateReservationToCreateANewRecord(reservationRequest);
@@ -125,7 +125,7 @@ public class ReservationValidatorTest {
     void shouldThrowReservationIncorrectDatesIfReservationDatesDoesNotHaveACorrectFormat() {
 
         IncorrectDataBadRequestException incorrectDataBadRequestException = Assertions.assertThrows(IncorrectDataBadRequestException.class, () -> {
-            ReservationRequest reservationRequest = ReservationRequestStubs.getReservationRequestStub();
+            ReservationRequest reservationRequest = ReservationStubs.getReservationRequestStub();
             reservationRequest.setId(null);
             reservationRequest.setReservationDates(Arrays.asList("2023/05/10"));
             validator.validateReservationToCreateANewRecord(reservationRequest);
@@ -139,7 +139,7 @@ public class ReservationValidatorTest {
     void shouldThrowReservationNullIdExceptionIfIdIsNull() {
 
         IncorrectDataBadRequestException incorrectDataBadRequestException = Assertions.assertThrows(IncorrectDataBadRequestException.class, () -> {
-            ReservationRequest reservationRequest = ReservationRequestStubs.getReservationRequestStub();
+            ReservationRequest reservationRequest = ReservationStubs.getReservationRequestStub();
             reservationRequest.setId(null);
             validator.validateReservationToUpdateARecord(reservationRequest);
         });
@@ -151,7 +151,7 @@ public class ReservationValidatorTest {
     void shouldThrowReservationEmptyIdExceptionIfIdIsEmpty() {
 
         IncorrectDataBadRequestException incorrectDataBadRequestException = Assertions.assertThrows(IncorrectDataBadRequestException.class, () -> {
-            ReservationRequest reservationRequest = ReservationRequestStubs.getReservationRequestStub();
+            ReservationRequest reservationRequest = ReservationStubs.getReservationRequestStub();
             reservationRequest.setId("");
             validator.validateReservationToUpdateARecord(reservationRequest);
         });
@@ -163,7 +163,7 @@ public class ReservationValidatorTest {
     void shouldThrowReservationIdIsNotNumericExceptionIfIdIsNotNumeric() {
 
         IncorrectDataBadRequestException incorrectDataBadRequestException = Assertions.assertThrows(IncorrectDataBadRequestException.class, () -> {
-            ReservationRequest reservationRequest = ReservationRequestStubs.getReservationRequestStub();
+            ReservationRequest reservationRequest = ReservationStubs.getReservationRequestStub();
             reservationRequest.setId("Not a numeric value");
             validator.validateReservationToUpdateARecord(reservationRequest);
         });
@@ -175,7 +175,7 @@ public class ReservationValidatorTest {
     void shouldThrowReservationEmptyClientFullNameExceptionIfClientFullNameIsEmptyToUpdate() {
 
         IncorrectDataBadRequestException incorrectDataBadRequestException = Assertions.assertThrows(IncorrectDataBadRequestException.class, () -> {
-            ReservationRequest reservationRequest = ReservationRequestStubs.getReservationRequestStub();
+            ReservationRequest reservationRequest = ReservationStubs.getReservationRequestStub();
             reservationRequest.setClientFullName("");
             validator.validateReservationToUpdateARecord(reservationRequest);
         });
@@ -187,7 +187,7 @@ public class ReservationValidatorTest {
     void shouldThrowReservationClientFullNameLengthGraterThan50ExceptionIfClientFullNameIsLengthGraterThan50ToUpdate() {
 
         IncorrectDataBadRequestException incorrectDataBadRequestException = Assertions.assertThrows(IncorrectDataBadRequestException.class, () -> {
-            ReservationRequest reservationRequest = ReservationRequestStubs.getReservationRequestStub();
+            ReservationRequest reservationRequest = ReservationStubs.getReservationRequestStub();
             reservationRequest.setClientFullName("Name too long for test Name too long for test Name too long for test");
             validator.validateReservationToUpdateARecord(reservationRequest);
         });
@@ -199,7 +199,7 @@ public class ReservationValidatorTest {
     void shouldThrowReservationEmptyRoomNumberExceptionIfRoomNumberIsEmptyToUpdate() {
 
         IncorrectDataBadRequestException incorrectDataBadRequestException = Assertions.assertThrows(IncorrectDataBadRequestException.class, () -> {
-            ReservationRequest reservationRequest = ReservationRequestStubs.getReservationRequestStub();
+            ReservationRequest reservationRequest = ReservationStubs.getReservationRequestStub();
             reservationRequest.setRoomNumber("");
             validator.validateReservationToUpdateARecord(reservationRequest);
         });
@@ -211,7 +211,7 @@ public class ReservationValidatorTest {
     void shouldThrowReservationRoomNumberIsNotNumericExceptionIfRoomNumberIsNotNumericToUpdate() {
 
         IncorrectDataBadRequestException incorrectDataBadRequestException = Assertions.assertThrows(IncorrectDataBadRequestException.class, () -> {
-            ReservationRequest reservationRequest = ReservationRequestStubs.getReservationRequestStub();
+            ReservationRequest reservationRequest = ReservationStubs.getReservationRequestStub();
             reservationRequest.setRoomNumber("Not a numeric value");
             validator.validateReservationToUpdateARecord(reservationRequest);
         });
@@ -223,7 +223,7 @@ public class ReservationValidatorTest {
     void shouldThrowReservationIncorrectDatesExceptionIfReservationDatesDoesNotHaveACorrectFormatToUpdate() {
 
         IncorrectDataBadRequestException incorrectDataBadRequestException = Assertions.assertThrows(IncorrectDataBadRequestException.class, () -> {
-            ReservationRequest reservationRequest = ReservationRequestStubs.getReservationRequestStub();
+            ReservationRequest reservationRequest = ReservationStubs.getReservationRequestStub();
             reservationRequest.setReservationDates(Arrays.asList("2023/05/10"));
             validator.validateReservationToUpdateARecord(reservationRequest);
         });
