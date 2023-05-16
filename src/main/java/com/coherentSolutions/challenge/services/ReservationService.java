@@ -109,7 +109,7 @@ public class ReservationService implements ReservationServiceContract {
                 formattedReservation.setReservationDates(reservationDateList);
                 return converter.fromEntity(reservationDAO.save(formattedReservation));
             } else
-                return null;
+                throw new GeneralException(AppMessages.RESERVATION_CAN_NOT_BE_CREATED.getMessage());
         }catch (DataNotFoundException | IncorrectDataBadRequestException exception){
             log.info(AppMessages.INFO_MESSAGE.getMessage() + exception.getMessage(), exception);
             throw exception;

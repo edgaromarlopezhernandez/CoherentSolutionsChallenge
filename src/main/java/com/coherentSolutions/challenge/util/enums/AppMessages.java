@@ -2,6 +2,7 @@ package com.coherentSolutions.challenge.util.enums;
 
 public enum AppMessages {
 
+    RESERVATION_CAN_NOT_BE_CREATED("Can not create a new reservation"),
     ERROR_EXCEPTION("************************ERROR EXCEPTION************************"),
     ERROR_MESSAGE("\"ERROR MESSAGE=> \""),
     INFO_MESSAGE("\"INFO MESSAGE=> \""),
