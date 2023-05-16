@@ -1,7 +1,7 @@
 package com.coherentSolutions.challenge.services;
 
-import com.coherentSolutions.challenge.dtos.ReservationRequest;
-import com.coherentSolutions.challenge.dtos.ReservationResponse;
+import com.coherentSolutions.challenge.dtos.PageInfo;
+import com.coherentSolutions.challenge.dtos.PaginatedReservations;
 import com.coherentSolutions.challenge.models.Reservation;
 import com.coherentSolutions.challenge.repositories.ReservationDAO;
 import com.coherentSolutions.challenge.repositories.ReservationDateDAO;
@@ -16,10 +16,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.mockito.ArgumentMatchers.any;
+import java.util.Optional;
+
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -46,22 +48,36 @@ public class ReservationServiceTest {
     @Mock
     private ReservationDateDAO reservationDateDAO;
 
+    @DisplayName("Return all reservations Happy path:)!")
+    @Test
+    public void returnAllReservations_WhenDatabaseIsNotEmpty() {
+        when(reservationDAO.count()).thenReturn(1L);
+        when(pageableHelper.helper(anyInt(), anyInt(), anyLong())).thenReturn(PageInfo.builder()
+                        .totalRecords(1L)
+                        .totalPages(1L)
+                        .pageSize(2)
+                        .previousPage(1)
+                        .currentPage(2)//Validate this
+                        .nextPage(1)
+                .build());
+        when(reservationDAO.findAll(any(Pageable.class))).thenReturn(ReservationStubs.getListOfReservations());
+        when(converter.fromEntity(any(Reservation.class))).thenReturn(ReservationStubs.getReservationResponse());
+        Optional<PaginatedReservations> response = service.findAllReservations(1, 2);
+
+        Assertions.assertNotNull(response);
+    }
+
+    @DisplayName("Return all reservations when db is empty")
+    @Test
+    public void returnAllReservations_WhenDatabaseIsEmpty() {
+        when(reservationDAO.count()).thenReturn(0L);
+        Optional<PaginatedReservations> response = service.findAllReservations(1, 2);
+        Assertions.assertEquals(Optional.empty(), response);
+    }
+
     @DisplayName("Create a reservation")
     @Test
     public void createReservationTest() {
-        /*ReservationRequest reservationRequest = ReservationStubs.getReservationRequestStub();
-        reservationRequest.setId(null);
-        Mockito.when(dataFormatter.formatReservationBeforePersistToCreateANewRecord(any(ReservationRequest.class))).thenReturn(ReservationStubs.getReservation());
-        Mockito.when(converter.fromEntity(any(Reservation.class))).thenReturn(ReservationStubs.getReservationResponse());
-        Mockito.when(reservationDAO.save(any(Reservation.class))).thenReturn(ReservationStubs.getReservation());
-        when(reservationDAO.save(Mockito.any(Reservation.class))).thenAnswer(invocation -> {
-            Reservation savedReservation = invocation.getArgument(0);
-            savedReservation.setId(1); // Simulating the ID generated during save
-            return savedReservation;
-        });
-        Mockito.when(reservationDAO.save(Mockito.any(Reservation.class)))
-                .thenAnswer(i -> i.getArguments()[0]);
-        ReservationResponse reservationResponse = service.createReservation(reservationRequest);
-        Assertions.assertEquals(reservationRequest.getClientFullName(), reservationResponse.getClientFullName());*/
+
     }
 }

@@ -66,7 +66,7 @@ public class ReservationConverter extends AbstractConverter<Reservation, Reserva
     }
 
     private List<ReservationDate> setListOfReservationDates(List<String> reservationDates, Integer id){
-        Reservation finalReservationToUpdate = reservationDAO.findById(id)
+        /*Reservation finalReservationToUpdate = reservationDAO.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(AppMessages.RESERVATION_DOES_NOT_EXIST.getMessage()));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         formatter = formatter.withLocale( Locale.US );
@@ -78,6 +78,8 @@ public class ReservationConverter extends AbstractConverter<Reservation, Reserva
             dates.add(reservationDate);
         }
         dates.forEach(reservationDate -> reservationDate.setReservation(finalReservationToUpdate));
-        return reservationDateDAO.saveAll(dates);
+        return reservationDateDAO.saveAll(dates);*/
+        // TODO: From DTO
+        return null;
     }
 }

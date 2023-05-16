@@ -61,9 +61,6 @@ public class ReservationService implements ReservationServiceContract {
             if(totalNumberOfRecords == 0)
                 return Optional.empty();
             return fetchAllReservationsData(pageNumber, pageSize, totalNumberOfRecords);
-        }catch (DataNotFoundException | IncorrectDataBadRequestException exception){
-            log.info(AppMessages.INFO_MESSAGE.getMessage() + exception.getMessage(), exception);
-            throw exception;
         }catch (Exception exception){
             log.error(AppMessages.ERROR_MESSAGE.getMessage() + exception.getMessage(), exception);
             throw new GeneralException(exception.getMessage(), exception);
@@ -79,9 +76,6 @@ public class ReservationService implements ReservationServiceContract {
             List<Reservation> reservations = reservationDAO.findAll(page).toList();
             paginatedReservations.setReservations(converter.fromEntity(reservations));
             return Optional.of(paginatedReservations);
-        }catch (DataNotFoundException | IncorrectDataBadRequestException exception){
-            log.info(AppMessages.INFO_MESSAGE.getMessage() + exception.getMessage(), exception);
-            throw exception;
         }catch (Exception exception){
             log.error(AppMessages.ERROR_MESSAGE.getMessage() + exception.getMessage(), exception);
             throw new GeneralException(exception.getMessage(), exception);
