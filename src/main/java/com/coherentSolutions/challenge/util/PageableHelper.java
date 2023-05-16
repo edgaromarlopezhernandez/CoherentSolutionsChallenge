@@ -3,6 +3,12 @@ package com.coherentSolutions.challenge.util;
 import com.coherentSolutions.challenge.dtos.PageInfo;
 import org.springframework.stereotype.Component;
 
+/**
+ * This class serves as a helper to perform pagination calculations for controllers that query resources using
+ * the HTTP GET verb.
+ * The values provided are: total number of records, total number of pages, page size, previous page,
+ * current page and next page.
+ */
 @Component
 public class PageableHelper {
     public PageInfo helper (Integer pageNumber, Integer pageSize, Long records){
